@@ -2856,6 +2856,12 @@ MNU_LoadSaveMove(UserCall UNUSED(call), MenuItem_p UNUSED(item))
                 MenuInputMode = FALSE;
                 }
             }
+#ifdef __SWITCH__
+        else {
+            sprintf(SaveGameDescr[game_num], "Game Save - %d", game_num);
+            item->custom();
+        }
+#else
         else
         // get input
         switch (MNU_InputString(SaveGameDescr[game_num], 114))
@@ -2893,6 +2899,7 @@ MNU_LoadSaveMove(UserCall UNUSED(call), MenuItem_p UNUSED(item))
                 item->custom();
                 }
             }
+#endif
         }
 
     return (TRUE);

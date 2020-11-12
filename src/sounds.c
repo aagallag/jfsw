@@ -1286,6 +1286,7 @@ void MusicStartup( void )
         CDInitialized = TRUE;
         }
 
+#ifndef __SWITCH__
     status = MUSIC_Init( devicetype, MusicParams );
 
     if ( status == MUSIC_Ok )
@@ -1299,6 +1300,10 @@ void MusicStartup( void )
         buildprintf("Music error: %s\n",MUSIC_ErrorString(MUSIC_ErrorCode));
         gs.MusicOn = FALSE;
         }
+#else
+    MusicInitialized = TRUE;
+    MUSIC_SetVolume( gs.MusicVolume );
+#endif
 
     if (MusicInitialized)
        loadtmb();
